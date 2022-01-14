@@ -16,16 +16,10 @@ error_reporting(E_ALL);
   //CHANGABLE VALUES
 	
 	const host = "localhost";
-	const username = "USER402673";
-	const password = "+pykS01DMqG4";
-	const dbname = "db_402673_2";
+	const username = "username";
+	const password = "password";
+	const dbname = "dbname";
 
-
-	/*
-	define("host","localhost");
-	define("username","USER402673");
-	define("password","+pykS01DMqG4");
-	define("dbname","db_402673_2");*/
 ?>
 <?php
 // No touchy here pls :)
