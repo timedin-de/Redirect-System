@@ -82,7 +82,6 @@
   <head>
     <title>TimedIn-Weiterleitungssystem</title>
     <meta charset="utf-8">
-    <base href="https://www.timedin.de/r/" target="_top">
     <style>
       .center {
         text-align: center;
