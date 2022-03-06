@@ -7,7 +7,8 @@
   //Website: timedin.2ix.de
   //All rights reseved
   //
-  
+  //CONTACT OTHER BEFORE COMERCIAL OR OTHER USE
+  //I would appreciate it if you credit me anywhere ;) 
   //CHANGABLE VALUES
 
   //request to lower case makes request id to lowercase so the case doesnt matter (the id in the json has to be lowercase as well)
@@ -29,18 +30,10 @@
   "<a href='#' onclick='event.preventDefault(),window.history.go(-1)'>>Zurück zur vorigen Seite &lt;</a><br>".
   "<br>Bitte kontrolliere die Weiterleitungs-ID";
   
-  //Specify absolute path to dbmanager and credentials file
-  require(".../DBManager.php");
-  $config = parse_ini_file('...credentials/mysql.ini');
+  //Beginning of main Code
 
-
-//Main code - no changable values here
-  $DBMngr = new DBManager($config["hostname"], $config["db_user_basic"],$config["db_pass_basic"], $config["db_name"]);
-
-
-
-    $sql = "DELETE FROM Redirects WHERE validUntil < \" " . date('Y-m-d H:i:s') . " \" ";
-    $DBMngr->delete($sql);
+  require("DBManager.php");
+  $DBMngr = new DBManager();
 
   $var = "";
   if (count($_GET) > 0 && isset($_GET["link"])) {
@@ -51,7 +44,7 @@
   if ($var != "" && $var != " ") {
     //$strJsonFileContents = file_get_contents("../r/json/url.json");
     //$array = json_decode($strJsonFileContents, true);
-    $array = $DBMngr->QuerySingleRow("SELECT * FROM Redirects WHERE id=\"%a0\"",$var);
+    $array = $DBMngr->QuerySingleRow("SELECT * FROM redirects WHERE id=\"".$var."\";");
     if($array != null) {
         if (array_key_exists("url", $array)) {
           $url = $array["url"];
@@ -81,17 +74,14 @@
       exit();
     }
   }
+
 ?>
 <!--Change here the appereance of the page when its not an valid Redirect ID-->
 <!DOCTYPE html>
 <html lang="de" dir="ltr">
   <head>
-    <title>Weiterleitungssystem | TimedIn</title>
+    <title>TimedIn-Weiterleitungssystem</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Weiterleitungssystem für gekürzte URLs und SocialMedia-Links von TimedIn.">
-    <link rel="stylesheet" type="text/css" href="/css/master.css">
-
     <style>
       .center {
         text-align: center;
@@ -102,38 +92,33 @@
     </style>
     <script type="text/javascript">
       function toggleNewTab(self) {
-      document.getElementById("submitForm").target = self.checked ? "_blank" : ""
+        document.getElementById("submitForm").target = self.checked ? "_blank" : ""
       }
     </script>
   </head>
   <body>
-      <h1>TimedIn-Weiterleitungen</h1>
-      <div class="content-box">
+      <div class="center">
         <?php 
           if ($error != 1) {
             if($error == 2) {
               echo $incorrectJsonMsg;
             } elseif ($error == 3) {
-              //TODO correct escaping of HTMLEntities
-              echo htmlspecialchars(str_replace("%redID%", $var, $invalidIDMsg));
+              echo str_replace("%redID%", $var, $invalidIDMsg);
             }
             echo $additionalInvalidID;
           } else {
-            //echo $noIDMsg;
+            echo $noIDMsg;
           }
           if($invalidIDinput) {
-            echo "<form id=\"submitForm\" action=\"\"  method=\"GET\">" .
-            "<input placeholder =\"Link-Code\" type =\"text\" name=\"link\"><br>" .
-            "<label for=\"newtab\">Im neuen Tab anzeigen: </label>".
-            "<input type=\"checkbox\" onchange=\"toggleNewTab(this);\"name=\"newtab\"><br>".
+            echo "<form id=\"submitForm\" action=\"\" target=\"_blank\"  method=\"GET\">" .
+            "<input placeholder =\"Redirect-ID\" type =\"text\" name=\"link\">" .
+            "<label>Im Neuen Tab anzeigen: </label>".
+            "<input type=\"checkbox\" checked onchange=\"toggleNewTab(this);\"name=\"newtab\">".
             "<input type =\"Submit\">". 
             "</form>";
           }
-          
         ?>
-        <p>Das Weiterleitungssystem für Kurzlink-Codes in sozialen Netzwerken, Empfehlungen und Informationen.<br><br>
-          Aktiviere "im neuen Tab anzeigen" damit dieses Fenster offen bleibt und mehrere Codes eingegeben werden können. <br><br>Einige Codes können nach einer Zeit oder Anzahl von Verwendungen ablaufen.</p>
+        <p>Weiterleitungssystem Version: 1.1 by TimedIn <a href="https://www.timedin.de">TimedIn.de</a></p>
       </div>
-      <?php include '/var/www/timedin.de/files/footer.php'; ?>
   </body>
 </html>

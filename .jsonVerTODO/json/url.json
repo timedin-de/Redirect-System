@@ -1,0 +1,17 @@
+{
+	"YOUR_SHORTCUT_ID":
+	{
+		"url" : "YOUR_URL",
+		"visible":false
+	},
+	"google":
+	{
+		"url":"http://google.de",
+		"visible":true
+	},
+	"google":
+	{
+		"url":"http://google.de",
+		"visible":true
+	}
+}

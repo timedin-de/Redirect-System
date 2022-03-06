@@ -1,0 +1,20 @@
+{
+	"YOUR_SHORTCUT_ID":
+	{
+		"url" : "YOUR_URL",
+		"visible":false
+	},
+	//\seperate them with commas
+	//EXAMPLE
+	"google":
+	{
+		//USING THE URL http://google.de
+		//dont forget http:// otherwise you get redirected to the page on the current website
+
+		"url":"http://google.de",
+		//Select wheter it should be visible when sending the link with messages
+		//Visible true uses an php header, Visible false uses java script href
+		//No visible equals visible false
+		"visible":true
+	}
+}
