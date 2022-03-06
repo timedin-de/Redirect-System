@@ -1,8 +1,6 @@
 # Redirect-System
-Basic PHP and JS Redirect System
-compatible with JSON 
+Basic MYSQL, PHP and JS Redirect System with expiry date and automatic removal
 
 Todo:
-- Mysql
 - Access Control
 - Seperate Code and customizable content
